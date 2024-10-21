@@ -50,3 +50,35 @@ http://localhost:3000/images/lenna.png?w=400&gray=0&h=600&q=100&fm=jpg
 
 # Documentação:
 https://documenter.getpostman.com/view/39141157/2sAXxY2nVN
+
+# Considerações finais:
+
+-> Nginx: 
+
+Neste exemplo, fizemos uso do nginx como fonte externa para usuários, consequentemente, não foi configurado nenhum certificado ssl
+    - Ações possíveis: Utilizar um certificadco público gratuito expedido pela própria amazon (checar serviço: certificate manager - AWS>)
+    - Conclusão: Em uma arquitetura de produção, antes do acesso ao proxy reverso do nginx (e seus respectivos load balancers), seria ideal configurar um load balancer elástico com a devida certificação SSL, para suporte de requisições HTTPS.
+
+Neste exemplo também foi configurado o proxy reverso (nginx), porém, para produção levar em consideração os comentários no arquivo /nginx.conf, para obter o resultado esperado no desafio (Acessando: https://images.weedo.it/pictures/clovis.png
+Será buscado no bucket: /pictures/clovis.png). Para obter tal resultado localmente, seria necessário alterar o arquivo etc/hosts.
+
+// Esta configuração é ideal para ec2, ou outros serviços de hospedagem de aplicações tendo em sua frente um elastic load balancer (custo baixo), com seu devido certificado ssl (grátis).
+
+// Para um produto, caso o nginx fosse a porta de entrada para a aplicação, o ideal seria proteger o próprio nginx com o certificado ssl.
+
+```bash
+server {
+    listen 80;  // A conexão não é protegida, é http, sem certificado ssl.
+    server_name images.weedo.it;  // url de entrada (o domínio precisa existir)
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_pass http://localhost:3000;  # url de produção da api
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_hide_header X-Powered-By;
+    }
+}
+```
