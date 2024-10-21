@@ -1,7 +1,8 @@
 export interface IPictureQuery {
     q?: number,
-    fm?: string,
+    fm?: 'png' | 'jpg' | 'webp',
     w?: number,
     h?: number,
-    gray?: number
+    gray?: number,
+
 }
