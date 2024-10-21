@@ -11,6 +11,13 @@
 [![Postman](https://img.shields.io/badge/Documentation-1.1-2C8EBB?logo=postman&logoColor=white)
 ](https://documenter.getpostman.com/view/39141157/2sAXxY2nVN)
 
+Esta API conta com:
+* Utilização de multi-region access point (bucket), com a utilização da disponibilidade mais geograficamente próxima do usuário ✅;
+* Utilização de redis para armazenamento em cache, evitando re-processamento da mesma query requisitada ✅;
+* Docker compose do servidor node, nginx, e redis ✅
+
+Observação: para alterar o arn do bucket (coloquei um próprio para fins de teste), basta alterar a variável de ambiente 'AWS_MULTI_REGION_ACCESS_POINT_ARN='
+
 
 # Pré-Requisitos:
 * Docker e Docker compose instalados no sistema;
