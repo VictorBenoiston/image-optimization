@@ -1,5 +1,5 @@
 <p align='center'>
-<img src="https://drive.google.com/file/d/1ftvL5pM7p6tvaFX02l4LBoa0FPm5AgPp/view?usp=sharing" width='500px'></img>
+<img src="https://firebasestorage.googleapis.com/v0/b/crwn-clothing-react-app.appspot.com/o/Inserir_um_ti%CC%81tulo-removebg-preview.png?alt=media&token=afe41da6-2e8d-4c40-9830-d49b9378cc33" width='500px'></img>
 </p>
 
 # Otimização de imagem API
